@@ -1,0 +1,2 @@
+#!/bin/sh
+scrot -s -f $HOME/Screenshots/$(date +%F-%H%M%S).jpg

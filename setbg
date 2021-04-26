@@ -1,0 +1,10 @@
+#!/bin/sh
+
+DEFAULT_BG_DIR="$HOME/Images"
+
+[[ "$1" == "" ]] && BG=$DEFAULT_BG_DIR || BG="$1"
+
+[[ -f "$BG" ]] && cp "$BG" $HOME/.config/wallpaper.png
+[[ -d "$BG" ]] && cp "$(find "$BG"/*.{png,jpg,jpeg} -type f | shuf -n 1)" $HOME/.config/wallpaper.png
+
+xwallpaper --zoom $HOME/.config/wallpaper.png

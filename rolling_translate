@@ -1,0 +1,9 @@
+#!/bin/sh
+
+echo "Paste text and press Ctrl+D when done to translate it."
+
+while : ; do
+    cat | tr -d '\n' | tr -d '\f' > .trans_temp
+    crow -b -f .trans_temp
+    rm .trans_temp
+done

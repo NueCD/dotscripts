@@ -1,0 +1,23 @@
+#!/bin/sh
+
+function run {
+    if [ -d "$HOME/projects/$1" ]; then
+        cd $HOME/projects/$1
+        [ -f "bin/activate" ] && source bin/activate && [ -f "work_step" ] && . work_step
+    else
+        printf "\"$1\" does not exist. Create it? (y/N): " && read IN
+        if [[ "$IN" == "y" || "$IN" == "Y" ]]; then
+            mkdir $HOME/projects/$1
+            cd $HOME/projects/$1
+
+            printf "Project typei (python/c/cpp): " && read IN
+            [ "$IN" == "python" ] && virtualenv . && source bin/activate && source work_step
+            [ "$IN" == "c" ] && touch Makefile && mkdir src && mkdir obj
+            [ "$IN" == "cpp" ] && touch Makefile && mkdir src && mkdir obj
+        fi
+    fi
+}
+
+
+[ "$1" == "" ] && printf "Usage: work [ project | OPTIONS ]\n    OPTIONS:\n        -l : List projects.\n" && exit
+[ "$1" == "-l" ] && ls -l $HOME/projects | awk '{print $9}' && exit 0

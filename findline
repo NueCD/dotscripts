@@ -1,0 +1,7 @@
+#!/bin/sh
+
+[[ "$1" == "" ]] && echo "Usage: $0 \"search string\"" && exit
+
+S="${@:1}"
+
+for F in *; do echo $F && cat -n $F | grep "$S"; done
